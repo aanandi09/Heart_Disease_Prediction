@@ -105,7 +105,7 @@ def load_benchmark_metrics():
 # -----------------------------------------------------------------------------
 # Master Design System: Exact Green Palette & Modern Typography
 # -----------------------------------------------------------------------------
-st.markdown(
+st.html(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
@@ -510,22 +510,64 @@ st.markdown(
 
     /* Streamlit Tabs Customization */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        border-bottom: 2px solid var(--border-accent);
+        gap: 12px !important;
+        border-bottom: 2px solid #A8C59A !important;
     }
 
-    .stTabs [data-baseweb="tab"] {
-        padding: 10px 20px;
-        font-weight: 700;
-        color: var(--text-secondary);
-        border-radius: 8px 8px 0 0;
-        background: transparent;
+    /* All tab labels - permanently visible */
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"] {
+        color: #3D5438 !important;
+        background-color: #F7FBF5 !important;
+        opacity: 1 !important;
+        padding: 12px 20px !important;
+        border-radius: 10px 10px 0 0 !important;
+        font-weight: 700 !important;
+        border: 1px solid #A8C59A !important;
     }
 
-    .stTabs [aria-selected="true"] {
-        color: var(--brand-primary) !important;
-        border-bottom: 3px solid var(--brand-primary) !important;
-        background: var(--surface-light) !important;
+    /* Force visibility of nested tab text */
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"] *,
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"] p {
+        color: #3D5438 !important;
+        -webkit-text-fill-color: #3D5438 !important;
+        opacity: 1 !important;
+    }
+
+    /* Active tab */
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"][aria-selected="true"] {
+        background-color: #E2F1D9 !important;
+        color: #1C2E19 !important;
+        border-bottom: 3px solid #6B8A61 !important;
+    }
+
+    /* Active tab nested text */
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"][aria-selected="true"] *,
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"][aria-selected="true"] p {
+        color: #1C2E19 !important;
+        -webkit-text-fill-color: #1C2E19 !important;
+        opacity: 1 !important;
+    }
+
+    /* Hover */
+    .stTabs [data-baseweb="tab-list"] button[data-baseweb="tab"]:hover {
+        background-color: #C7E3B8 !important;
+        color: #1C2E19 !important;
+    }
+
+    /* =====================================================
+    FIX: Form Labels and Input Visibility
+    ===================================================== */
+
+    [data-testid="stWidgetLabel"] p,
+    [data-testid="stWidgetLabel"] label,
+    [data-testid="stWidgetLabel"] span,
+    .stTextInput label,
+    .stNumberInput label,
+    .stSelectbox label,
+    .stTextArea label {
+        color: #1C2E19 !important;
+        opacity: 1 !important;
+        font-weight: 600 !important;
     }
 
     /* Input widgets styling */
@@ -685,15 +727,61 @@ st.markdown(
             animation: none !important;
         }
     }
+
+    .stTabs [data-baseweb="tab-list"] {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+        overflow: visible !important;
+        width: 100% !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] button[role="tab"] {
+        flex: 0 1 auto !important;
+        min-width: 100px !important;
+        padding: 12px 18px !important;
+        background: #F7FBF5 !important;
+        color: #496B43 !important;
+        border: 1px solid #A8C59A !important;
+        border-radius: 10px 10px 0 0 !important;
+        opacity: 1 !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] button[role="tab"] p,
+    .stTabs [data-baseweb="tab-list"] button[role="tab"] div,
+    .stTabs [data-baseweb="tab-list"] button[role="tab"] span {
+        color: #496B43 !important;
+        -webkit-text-fill-color: #496B43 !important;
+        opacity: 1 !important;
+        font-weight: 700 !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] {
+        background: #E2F1D9 !important;
+        color: #1C2E19 !important;
+        border-bottom: 3px solid #6B8A61 !important;
+    }
+
+    .stTabs [data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] p,
+    .stTabs [data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] span {
+        color: #1C2E19 !important;
+        -webkit-text-fill-color: #1C2E19 !important;
+    }
+
+    .stTabs [data-baseweb="tab-highlight"] {
+        background-color: #6B8A61 !important;
+    }
+
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #C7E3B8 !important;
+    }
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+    """)
 
 
 def render_animated_background():
     """Renders subtle, hardware-accelerated animated medical & neural network background."""
-    st.markdown(
+    st.html(
         """
         <div class="heartcare-animated-bg" aria-hidden="true">
             <svg class="bg-svg-canvas" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -775,9 +863,7 @@ def render_animated_background():
             <div class="particle p4"></div>
             <div class="particle p5"></div>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
 
 
 def render_top_navbar(current_section):
@@ -1777,14 +1863,14 @@ statistical likelihood and must NEVER replace professional medical evaluation.
         if st.button("Explore Clinical Prediction ➔", key="btn_goto_pred_from_abt", type="primary"):
             st.session_state.active_nav_section = "Prediction"
             st.rerun()
-        elif st.session_state.active_nav_section == "Patient Login":
-            render_patient_login()
-        elif st.session_state.active_nav_section == "Doctor Login":
-            render_doctor_login()
-        elif st.session_state.active_nav_section == "My Portal":
-            render_patient_portal()
-        elif st.session_state.active_nav_section == "Doctor Portal":
-            render_doctor_portal()
+    elif st.session_state.active_nav_section == "Patient Login":
+        render_patient_login()
+    elif st.session_state.active_nav_section == "Doctor Login":
+        render_doctor_login()
+    elif st.session_state.active_nav_section == "My Portal":
+        render_patient_portal()
+    elif st.session_state.active_nav_section == "Doctor Portal":
+        render_doctor_portal()
     # Always render common footer across every section
     render_common_footer()
 

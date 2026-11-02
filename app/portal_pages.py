@@ -29,15 +29,15 @@ PORTAL_FOR_ROLE = {"patient": "My Portal", "doctor": "Doctor Portal"}
 # -----------------------------------------------------------------------------
 def render_stethoscope_background():
     """Fixed, non-interactive stethoscope: tube sways, chest piece thumps, rings pulse."""
-    st.markdown(
+    st.html(
         """
         <style>
         .stetho-wrap {
             position: fixed;
-            right: 2%;
-            bottom: 4%;
-            width: 130px;
-            opacity: 0.40;
+            right: 3%;
+            bottom: 5%;
+            width: 210px;
+            opacity: 0.65;
             pointer-events: none;
             user-select: none;
             z-index: 0;
@@ -72,7 +72,17 @@ def render_stethoscope_background():
             0% { transform: scale(0.6); opacity: 0.7; }
             100% { transform: scale(2.4); opacity: 0; }
         }
-        @media (max-width: 700px) { .stetho-wrap { width: 84px; } }
+        .stetho-glow {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: stethoGlow 1.6s ease-in-out infinite;
+        }
+        @keyframes stethoGlow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            15% { opacity: 0.6; transform: scale(1.25); }
+            45% { opacity: 0.45; transform: scale(1.15); }
+        }
+        @media (max-width: 700px) { .stetho-wrap { width: 110px; opacity: 0.5; } }
         @media (prefers-reduced-motion: reduce) {
             .stetho-wrap * { animation: none !important; }
         }
@@ -86,6 +96,7 @@ def render_stethoscope_background():
                     <path d="M60 28 C60 90 100 100 100 130"/>
                     <path d="M140 28 C140 90 100 100 100 130"/>
                     <path d="M100 130 C100 185 150 185 150 215"/>
+                    <circle class="stetho-glow" cx="150" cy="232" r="26" fill="#C7E3B8" stroke="none"/>
                     <g class="stetho-chest">
                         <circle cx="150" cy="232" r="18" fill="#E2F1D9"/>
                         <circle cx="150" cy="232" r="8" fill="#6B8A61" stroke="none"/>
@@ -95,9 +106,7 @@ def render_stethoscope_background():
                 </g>
             </svg>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+        """)
 
 
 # -----------------------------------------------------------------------------
