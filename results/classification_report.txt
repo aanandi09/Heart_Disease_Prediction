@@ -1,0 +1,12 @@
+Heart Disease Prediction ANN - Leakage-Free Test Classification Report
+=====================================================================
+Protocol: Zero-Leakage Split on Unique Patients (N=302 total, N=61 test)
+
+                     precision    recall  f1-score   support
+
+     No Disease (0)       0.78      0.89      0.83        28
+Disease Present (1)       0.90      0.79      0.84        33
+
+           accuracy                           0.84        61
+          macro avg       0.84      0.84      0.84        61
+       weighted avg       0.84      0.84      0.84        61
